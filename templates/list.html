@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <title>{{title}}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+
+          <!-- The logo on the top left of the nav bar -->
+          <a class="navbar-brand" href="#">
+            <img alt="Brand" src="{{ url_for('static', filename='img/logo.png') }}" height="30">
+          </a>
+
+          <div class="btn-group" role="group">
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle navbar-btn" type="button" data-toggle="dropdown">Country
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#">Belgium</a></li>
+                <li><a href="#">England</a></li>
+                <li><a href="#">France</a></li>
+                <li><a href="#">Germany</a></li>
+                <li><a href="#">Greece</a></li>
+                <li><a href="#">Holland</a></li>
+                <li><a href="#">Italy</a></li>
+                <li><a href="#">Spain</a></li>
+                <li><a href="#">Scotland</a></li>
+                <li><a href="#">Portugal</a></li>
+                <li><a href="#">Turkey</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="btn-group" role="group">
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle navbar-btn" type="button" data-toggle="dropdown">Season
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#">2015/2016</a></li>
+                <li><a href="#">2014/2015</a></li>
+                <li><a href="#">2013/2014</a></li>
+                <li><a href="#">2012/2013</a></li>
+                <li><a href="#">2011/2012</a></li>
+                <li><a href="#">2010/2011</a></li>
+                <li><a href="#">2009/2010</a></li>
+                <li><a href="#">2008/2009</a></li>
+              </ul>
+            </div>
+          </div>
+ 
+          <div class="btn-group" role="group">
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle navbar-btn" type="button" data-toggle="dropdown">Home Team
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                {% if initial_selection %}
+	                <li class="disabled"><a href="#">HomeTeam</a></li>
+	            {% else %}
+	                <li class="disabled"><a href="#">HomeTeam</a></li>	            	  
+	            {% endif %}
+              </ul>
+            </div>
+          </div>         
+          
+          <div class="btn-group" role="group">
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle navbar-btn" type="button" data-toggle="dropdown">Away Team
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li class="disabled"><a href="#">AwayTeam</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    
+    {% for value in listItems %}
+      {{ value }}<br />
+    {% endfor %}
+    
+  </body>
+</html>
