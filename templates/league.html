@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <title>{{title}}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+
+          <!-- The logo on the top left of the nav bar -->
+          <a class="navbar-brand" href="/">
+            <img alt="Brand" src="{{ url_for('static', filename='img/logo.png') }}" height="30">
+          </a>
+
+          <div class="btn-group" role="group">
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle navbar-btn" type="button" data-toggle="dropdown">
+              {% if country != 'NULL' %}
+                {{country}}
+              {% else %}
+                Country
+              {% endif %}
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="/api/v1.0/league?country=Belgium&season={{season}}&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">Belgium</a></li>
+                <li><a href="/api/v1.0/league?country=England&season={{season}}&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">England</a></li>
+                <li><a href="/api/v1.0/league?country=France&season={{season}}&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">France</a></li>
+                <li><a href="/api/v1.0/league?country=Germany&season={{season}}&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">Germany</a></li>
+                <li><a href="/api/v1.0/league?country=Greece&season={{season}}&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">Greece</a></li>
+                <li><a href="/api/v1.0/league?country=Holland&season={{season}}&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">Holland</a></li>
+                <li><a href="/api/v1.0/league?country=Italy&season={{season}}&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">Italy</a></li>
+                <li><a href="/api/v1.0/league?country=Spain&season={{season}}&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">Spain</a></li>
+                <li><a href="/api/v1.0/league?country=Scotland&season={{season}}&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">Scotland</a></li>
+                <li><a href="/api/v1.0/league?country=Portugal&season={{season}}&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">Portugal</a></li>
+                <li><a href="/api/v1.0/league?country=Turkey&season={{season}}&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">Turkey</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="btn-group" role="group">
+            <div class="dropdown" name="homeTeamMenu" id="homeTeamMenu">
+              <button class="btn btn-success dropdown-toggle navbar-btn" type="button" data-toggle="dropdown">
+              {% if season != 'NULL' %}
+                {{season}}
+              {% else %}
+                Season
+              {% endif %}
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="/api/v1.0/league?country={{country}}&season=2015-2016&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">2015-2016</a></li>
+                <li><a href="/api/v1.0/league?country={{country}}&season=2014-2015&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">2014-2015</a></li>
+                <li><a href="/api/v1.0/league?country={{country}}&season=2013-2014&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">2013-2014</a></li>
+                <li><a href="/api/v1.0/league?country={{country}}&season=2012-2013&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">2012-2013</a></li>
+                <li><a href="/api/v1.0/league?country={{country}}&season=2011-2012&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">2011-2012</a></li>
+                <li><a href="/api/v1.0/league?country={{country}}&season=2010-2011&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">2010-2011</a></li>
+                <li><a href="/api/v1.0/league?country={{country}}&season=2009-2010&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">2009-2010</a></li>
+                <li><a href="/api/v1.0/league?country={{country}}&season=2008-2009&homeTeam={{homeTeam}}&awayTeam={{awayTeam}}">2008-2009</a></li>
+              </ul>
+            </div>
+          </div>
+ 
+          <div class="btn-group" role="group">
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle navbar-btn" type="button" data-toggle="dropdown">
+              {% if homeTeam == 'NULL' %}
+				Home Team
+              {% else %}
+                {{homeTeam}}
+              {% endif %}              
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                {% if homeTeamList is not none %}
+                  {% for homeSelection in homeTeamList %}
+		            <li><a href="/api/v1.0/league?country={{country}}&season={{season}}&homeTeam={{homeSelection}}&awayTeam={{awayTeam}}">{{homeSelection}}</a></li>	            	  
+  	    	      {% endfor %}
+  	    	    {% else %}
+  	    	      <li class="disabled"><a href="#">Home Team</a></li>
+	            {% endif %}
+              </ul>
+            </div>
+          </div>         
+          
+          <div class="btn-group" role="group">
+            <div class="dropdown" name="awayTeamMenu" id="awayTeamMenu">
+              <button class="btn btn-success dropdown-toggle navbar-btn" type="button" data-toggle="dropdown">
+              {% if awayTeam == 'NULL' %}
+				Away Team
+              {% else %}
+                {{awayTeam}}
+              {% endif %}              
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                {% if awayTeamList is not none %}
+                  {% for awaySelection in awayTeamList %}
+		            <li><a href="/api/v1.0/league?country={{country}}&season={{season}}&homeTeam={{homeTeam}}&awayTeam={{awaySelection}}">{{awaySelection}}</a></li>	            	  
+  	    	      {% endfor %}
+  	    	    {% else %}
+  	    	      <li class="disabled"><a href="#">Away Team</a></li>
+	            {% endif %}
+              </ul>
+            </div>
+          </div> 
+
+
+        </div>
+      </div>
+    </nav>
+    
+    {{ htmlTable|safe }}
+    
+  </body>
+</html>
