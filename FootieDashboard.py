@@ -39,7 +39,6 @@ def processLeague(season, country, homeTeam, awayTeam):
 	league = League(country, season)
 	league.addFixtures(fixtureList)
 	htmlTable = league.getHTMLTable()
-	print htmlTable
 	return htmlTable
 
 def getTeamList(country, season):
@@ -113,11 +112,12 @@ def getFixtureList(country, season):
 		inputFile = open(filePath, 'r')
 		header = None
 		for index, line in enumerate(inputFile):
-			if index > 0:
-				fixture = Fixture(header, line)
-				fixtureList.append(fixture)
+			if index == 0:
+				header = line.rstrip().split(',')
 			else:
-				header = line		
+				tokens = line.rstrip().split(',')
+				fixture = Fixture(header, tokens)
+				fixtureList.append(fixture)
 	return fixtureList
 
 
