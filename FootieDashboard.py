@@ -19,8 +19,11 @@ def getTask():
 		homeTeam = request.args.get('homeTeam')
 		awayTeam = request.args.get('awayTeam')
 
-		print 'HOMETEAM:',homeTeam
-		print 'AWAYTEAM:',awayTeam
+		if homeTeam == 'NULL' or homeTeam == 'None':
+			homeTeam = 'NULL'
+			
+		if awayTeam == 'NULL' or awayTeam == 'None':
+			awayTeam = 'NULL'
 
 		homeTeamList = []
 		awayTeamList = []
@@ -56,19 +59,17 @@ def getTask():
 				for index, line in enumerate(inputFile):
 					if index > 0:
 						elements = line.rstrip().split(',')
-						homeTeam = elements[2]
-						awayTeam = elements[3]
-						if homeTeam not in homeTeamList:
-							homeTeamList.append(homeTeam)
-						if awayTeam not in awayTeamList:
-							awayTeamList.append(awayTeam)
+						if elements[2] not in homeTeamList:
+							homeTeamList.append(elements[2])
+						if elements[3] not in awayTeamList:
+							awayTeamList.append(elements[3])
 							
 			homeTeamList.sort()
 			awayTeamList.sort()
 
 			return render_template('index.html', country=country, season=season, homeTeam=homeTeam, awayTeam=awayTeam, homeTeamList=homeTeamList, awayTeamList=awayTeamList)
 		else:
-			return render_template('index.html', country=country, season=season, homeTeam=None, awayTeam=None, homeTeamList=None, awayTeamList=None)
+			return render_template('index.html', country=country, season=season, homeTeam='NULL', awayTeam='NULL', homeTeamList=None, awayTeamList=None)
 
 
 if __name__ == '__main__':
